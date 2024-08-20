@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function FacultyLogin() {
+function Login() {
   const { handleLogin } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,11 +44,11 @@ function FacultyLogin() {
 
             const decodedUser = jwtDecode(response.data.jwt)
 
-              if(decodedUser.roles==="FACULTY"){
+              if(decodedUser.roles==="ADMIN"){
                 // console.log(response.data.jwt)
                 handleLogin(response.data.jwt)
                         notify()
-                        navigate("/facultypanel")
+                        navigate("/")
               }
              
               else{
@@ -90,9 +90,9 @@ function FacultyLogin() {
                 src="gorib.png"
                 width="150"
                 alt="Logo"
-              />             
-               <h1 className="mb-2 text-2xl mt-3">Faculty Portal</h1>
-              <span className="text-gray-300">Forgot Password?</span>
+              />
+              <h1 className="mb-2 text-2xl mt-3">ADMIN</h1>
+              {/* <span className="text-gray-300">Forgot Password?</span> */}
             </div>
             <form onSubmit={handleSubmit}>
               <div className="mb-4 text-lg">
@@ -135,4 +135,4 @@ function FacultyLogin() {
   );
 }
 
-export default FacultyLogin;
+export default Login;

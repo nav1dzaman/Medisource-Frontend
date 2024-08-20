@@ -1,16 +1,11 @@
 import React from 'react'
-import StudentLogin from './student/StudentLogin'
-import Footer from '../components/Footer'
+import Login from './authPages/Login'
 
 function Home() {
   return (
     <div>
 
-      <div>
-           
-        <StudentLogin/>
-        <Footer/>
-      </div>
+        <Login/>
     </div>
   )
 }
