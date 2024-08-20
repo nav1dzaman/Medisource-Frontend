@@ -15,122 +15,148 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading,Setloading]=useState(false);
-  const [token,SetToken]=useState("")
-  const navigate=useNavigate();
+  const [loading, Setloading] = useState(false);
+  const [token, SetToken] = useState("");
+  const navigate = useNavigate();
   const notify = () => toast.success("Successfully Logged In");
   const notifyError = errorName => toast.error(errorName);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  Setloading(true);
+    Setloading(true);
     console.log(email);
 
-    axios.post('http://localhost:5050/auth/login', JSON.stringify({
-        email,
-        password,
-      }), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => {
+    axios.post('http://localhost:8000/auth/login', JSON.stringify({
+      email,
+      password,
+    }), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (response.data.jwt === "") {
+          notifyError("Invalid Credentials");
+          setError('Invalid email or password');
+        } else {
+          const decodedUser = jwtDecode(response.data.jwt);
+          if (decodedUser.roles === "ADMIN") {
+            handleLogin(response.data.jwt);
+            notify();
+            navigate("/adminpanel");
+          }
+          else if(decodedUser.roles === "DOCTOR"){
+            handleLogin(response.data.jwt);
+            notify();
+            navigate("/doctorpanel");
 
-          if(response.data.jwt===""){
-            notifyError("Inavalid Credentials")
+          }
+          else if(decodedUser.roles === "PATIENT"){
+            handleLogin(response.data.jwt);
+            notify();
+            navigate("/patientpanel");
+          }
+          else if(decodedUser.roles === "MANAGER"){
+            handleLogin(response.data.jwt);
+            notify();
+            navigate("/managerpanel");
+          }
+
+           else {
+            notifyError("Invalid Credentials");
             setError('Invalid email or password');
           }
-          else{
-
-            const decodedUser = jwtDecode(response.data.jwt)
-
-              if(decodedUser.roles==="ADMIN"){
-                // console.log(response.data.jwt)
-                handleLogin(response.data.jwt)
-                        notify()
-                        navigate("/")
-              }
-             
-              else{
-
-
-                notifyError("Inavalid Credentials")
-                setError('Invalid email or password');
-
-              }
-            
-          }
-          
-         
-
-            
-
-           
-            console.log(decodedUser.roles);
-
-          setError('');
-        })
-        .catch(err => {
-          // setError('Invalid email or password');
-          // notifyError("Internal Error")
-        });
-  
+        }
+        setError('');
+      })
+      .catch(err => {
+        // setError('Invalid email or password');
+        // notifyError("Internal Error")
+      });
   };
 
   return (
-    <div>
-      <div
-        className="flex h-screen w-full mb-[-24px] items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="rounded-xl bg-gray-800 bg-opacity-50 mt-[-35px] px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-          <div className="text-white">
-            <div className="mb-8 flex flex-col items-center">
-              <img
-                src="gorib.png"
-                width="150"
-                alt="Logo"
-              />
-              <h1 className="mb-2 text-2xl mt-3">ADMIN</h1>
-              {/* <span className="text-gray-300">Forgot Password?</span> */}
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4 text-lg">
-                <input
-                  className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                  type="text"
-                  name="email"
-                  placeholder="mail@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+    <div className="bg-gray-50 font-[sans-serif]">
+      <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+        <div className="max-w-md w-full">
+          {/* <a href="javascript:void(0)">
+            <img
+              src="https://readymadeui.com/readymadeui.svg"
+              alt="logo"
+              className="w-40 mb-8 mx-auto block"
+            />
+          </a> */}
+
+          <div className="p-8 rounded-2xl bg-white shadow">
+            <h2 className="text-gray-800 text-center text-2xl font-bold">Sign in</h2>
+            <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Email</label>
+                <div className="relative flex items-center">
+                  <input
+                    name="email"
+                    type="text"
+                    required
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="mb-4 text-lg">
-                <input
-                  className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                  type="password"
-                  name="password"
-                  placeholder="*********"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Password</label>
+                <div className="relative flex items-center">
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
+
               {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-              <div className="mt-8 flex justify-center text-lg text-black">
+
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                    Remember me
+                  </label>
+                </div>
+                <div className="text-sm">
+                  <a href="javascript:void(0);" className="text-blue-600 hover:underline font-semibold">
+                    Forgot your password?
+                  </a>
+                </div>
+              </div>
+
+              <div className="!mt-8">
                 <button
                   type="submit"
-                  className="rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
+                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                 >
-                  Login
+                  Sign in
                 </button>
               </div>
+              <p className="text-gray-800 text-sm !mt-8 text-center">
+                Don't have an account? <a href="javascript:void(0);" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Register here</a>
+              </p>
             </form>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

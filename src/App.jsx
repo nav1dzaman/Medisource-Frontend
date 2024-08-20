@@ -9,8 +9,14 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Routes, Route, Router } from "react-router-dom";
 import Home from "./pages/Home.jsx"
 import ErrorPage from './pages/ErrorPage.jsx';
+import AdminPanel from './pages/admin/AdminPanel.jsx'
+import DoctorPanel from './pages/doctor/DoctorPanel.jsx'
+import PatientPanel from './pages/patient/PatientPanel.jsx'
+import MangerPanel from './pages/manager/ManagerPanel.jsx'
+
 
 import { useAuth } from './auth/AuthProvider.jsx';
+import Login from './pages/authPages/Login.jsx';
 function App() {
   const { loggedIn } = useAuth();
 
@@ -20,7 +26,11 @@ function App() {
 
    <Routes>
         <Route path="/" element={<Home />}></Route>
-        {/* <Route path="admin" element={<AdminLogin />}></Route> */}
+        <Route path="login" element={<Login />}></Route>
+        <Route path="adminpanel" element={<AdminPanel/>}></Route>
+        <Route path="doctorpanel" element={<DoctorPanel/>}></Route>
+        <Route path="patientpanel" element={<PatientPanel/>}></Route>
+        <Route path="managerpanel" element={<MangerPanel/>}></Route>
         {/* <Route path="faculty" element={<FacultyLogin/>}></Route>
         <Route path="admin" element={<AdminLogin/>}></Route>
 
