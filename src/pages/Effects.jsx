@@ -6,8 +6,8 @@ const Effects = () => {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKYMP1WeOZoAB42ZNLjdwadTv4G98BUvVzWg&s",
     "https://doccarebd.com/wp-content/uploads/2023/01/popular_medical_center_ltd.png",
     "https://labaidgroup.com/files/product_labaid_logo_20130827144530116.jpg",
-    "https://www.doctorspedia.co/uploads/hospital/6599017122df9.png",
-    "https://allwebbd.com/wp-content/uploads/2023/08/Untitled-1.png",
+    "https://www.evercarebd.com/wp-content/themes/wp-bootstrap-starter-child/asset/img/Asset%204.jpg",
+    "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Morogram_of_Dhaka_Medical_College.svg/1200px-Morogram_of_Dhaka_Medical_College.svg.png",
     "https://i0.wp.com/www.transparenthands.org/wp-content/uploads/2021/10/United-Logo.png?fit=770%2C493&ssl=1",
   ];
 
