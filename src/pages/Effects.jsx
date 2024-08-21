@@ -6,19 +6,21 @@ const Effects = () => {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKYMP1WeOZoAB42ZNLjdwadTv4G98BUvVzWg&s",
     "https://doccarebd.com/wp-content/uploads/2023/01/popular_medical_center_ltd.png",
     "https://labaidgroup.com/files/product_labaid_logo_20130827144530116.jpg",
-    "https://www.doctorspedia.co/uploads/hospital/6599017122df9.png",
-    "https://allwebbd.com/wp-content/uploads/2023/08/Untitled-1.png",
+    "https://www.evercarebd.com/wp-content/themes/wp-bootstrap-starter-child/asset/img/Asset%204.jpg",
+    "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Morogram_of_Dhaka_Medical_College.svg/1200px-Morogram_of_Dhaka_Medical_College.svg.png",
     "https://i0.wp.com/www.transparenthands.org/wp-content/uploads/2021/10/United-Logo.png?fit=770%2C493&ssl=1",
+    "https://seeklogo.com/images/S/ssmch-logo-0016761280-seeklogo.com.png",
+    "https://www.doctorspedia.co/uploads/hospital/63df96ca9610a.jpg",
   ];
 
-  const row2 = [
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/6c585c33ca6c71c79bb7.png",
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/9dd55e54b5a28658bf4e.png",
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/0384060dcbf73b6a707c.png",
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/35e044b3354aaa0caed5.png",
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/f50ae7cbf6cc805bdadc.png",
-    "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/6c585c33ca6c71c79bb7.png",
-  ];
+  // const row2 = [
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/6c585c33ca6c71c79bb7.png",
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/9dd55e54b5a28658bf4e.png",
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/0384060dcbf73b6a707c.png",
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/35e044b3354aaa0caed5.png",
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/f50ae7cbf6cc805bdadc.png",
+  //   "https://assets.algoexpert.io/spas/main/prod/g523bdeb478-prod/dist/images/6c585c33ca6c71c79bb7.png",
+  // ];
 
   return (
     <AppContainer>
@@ -26,7 +28,7 @@ const Effects = () => {
         {/* <Text>With Great Outcomes.</Text>
         <Note>Our customers have gotten offers from awesome companies.</Note> */}
         <Marquee>
-          <MarqueeGroup >
+          <MarqueeGroup>
             {row1.map((el, index) => (
               <ImageGroup key={index}>
                 <Image className="bg-white" src={el} />
@@ -65,8 +67,8 @@ const Effects = () => {
 export default Effects;
 
 const AppContainer = styled.div`
-//   width: 70vw;
-//   height: 100vh;
+  //   width: 70vw;
+  //   height: 100vh;
   color: #000000;
   position: relative;
   display: flex;
